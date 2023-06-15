@@ -119,7 +119,10 @@ function Header() {
                 </ImgContainer>
                 <BurgerNav>
                   {data.map((operator: IOperator) => (
-                    <Link href={`/operator/${operator.title}`}>
+                    <Link
+                      key={operator.title}
+                      href={`/operator/${operator.title}`}
+                    >
                       {operator.title}
                     </Link>
                   ))}

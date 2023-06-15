@@ -197,21 +197,17 @@ export default function Form() {
         <MaskedInput
           type='tel'
           mask={'+7 (999) 999-99-99'}
-          alwaysShowMask={true}
-          maskPlaceholder=''
+          alwaysShowMask={false}
+          placeholder='Ex: +7 (999) 999-99-99'
           {...register('phone', {
             required: {
               value: true,
               message:
                 "Please add your mobile phone number, I won't call you, promise!",
             },
-            // pattern: {
-            //   value: /^[0-9+-]+$/,
-            //   message: 'This is not a valid mobile phone to me, try again!',
-            // },
-            minLength: {
-              value: 17,
-              message: 'This number is too short, not gotta fly, try again',
+            pattern: {
+              value: /^[0-9+-\s\(\)]+$/,
+              message: 'This is not a valid mobile phone to me, try again!',
             },
             maxLength: {
               value: 18,

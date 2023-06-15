@@ -1,7 +1,7 @@
 import React from 'react'
 
 function NotFound() {
-  return <div className='other'>This page doesn't exist</div>
+  return <div>This page does not exist</div>
 }
 
 export default NotFound

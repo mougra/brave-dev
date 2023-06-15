@@ -3,10 +3,38 @@ import { useForm, SubmitHandler } from 'react-hook-form'
 import styled from 'styled-components'
 import Modal from './Modal'
 import { useRouter } from 'next/navigation'
+import MaskedInput from 'react-input-mask'
 
 const ButtonNavigate = styled.button`
-  padding: 10px;
+  max-width: 280px;
+  width: 100%;
+  background: #fe8c21;
+  color: black;
+  border: none;
+  margin-top: 40px;
+  padding: 20px;
+  font-size: 1.5rem;
+  font-weight: 100;
+  letter-spacing: 5px;
+  border-radius: 8px;
+
+  &:hover {
+    background: #d45049;
+    color: white;
+  }
+  @media (max-width: 576px) {
+    font-size: 1rem;
+  }
 `
+
+const SpanModal = styled.span`
+  font-size: 2rem;
+  color: transparent;
+  -webkit-background-clip: text;
+  background-clip: text;
+  background-image: linear-gradient(#fb0000, #ff85039f);
+`
+
 const FormContainer = styled.div`
   form {
     max-width: 500px;
@@ -114,6 +142,8 @@ export default function Form() {
   const [data, setData] = useState<null | DataType>(null)
 
   const onSubmit: SubmitHandler<FormData> = (dataSubmit) => {
+    console.log(dataSubmit)
+
     setData(null)
     getDataFromServer().then(
       (value: any) => setData(value),
@@ -164,25 +194,27 @@ export default function Form() {
         {errors.sum && <p>{errors.sum.message}</p>}
 
         <label>Номер телефона</label>
-        <input
+        <MaskedInput
           type='tel'
-          placeholder='8-912-0000001'
+          mask={'+7 (999) 999-99-99'}
+          alwaysShowMask={true}
+          maskPlaceholder=''
           {...register('phone', {
             required: {
               value: true,
               message:
                 "Please add your mobile phone number, I won't call you, promise!",
             },
-            pattern: {
-              value: /^[0-9+-]+$/,
-              message: 'This is not a valid mobile phone to me, try again!',
-            },
+            // pattern: {
+            //   value: /^[0-9+-]+$/,
+            //   message: 'This is not a valid mobile phone to me, try again!',
+            // },
             minLength: {
-              value: 11,
+              value: 17,
               message: 'This number is too short, not gotta fly, try again',
             },
             maxLength: {
-              value: 15,
+              value: 18,
               message:
                 "...And now it's too damn long, make sure the number is right, would you?",
             },
@@ -197,9 +229,13 @@ export default function Form() {
       </form>
 
       <Modal active={modalActive} setActive={setModalActive}>
-        {data === null && <span>Loading...</span>}
-        {data?.payment && data !== null && <span>Оплата прошла успешно</span>}
-        {!data?.payment && data !== null && <span>Оплата не прошла</span>}
+        {data === null && <SpanModal>Loading...</SpanModal>}
+        {data?.payment && data !== null && (
+          <SpanModal>Оплата прошла успешно</SpanModal>
+        )}
+        {!data?.payment && data !== null && (
+          <SpanModal>Оплата не прошла</SpanModal>
+        )}
         {data !== null && (
           <ButtonNavigate onClick={() => NavigateHandler(data?.payment)}>
             {data?.payment ? 'Вернуться на главную' : 'Попробовать ещё раз'}

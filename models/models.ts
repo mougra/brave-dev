@@ -1,4 +1,4 @@
-export interface IPost {
+export interface IOperator {
   title: string
   text: string
   tags: string

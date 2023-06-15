@@ -7,7 +7,9 @@ const Layout = styled.div`
   background-image: linear-gradient(90.6deg, #e66374 -25.85%, #f2e265 118.6%);
   margin: 0;
   min-height: 100vh;
-  padding: 100px 0;
+  padding: 1rem 0;
+  display: flex;
+  align-items: center;
 `
 
 const Wrapper = styled.div`

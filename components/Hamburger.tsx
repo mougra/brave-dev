@@ -9,7 +9,7 @@ const StyledHamburger = styled.button<{ open: boolean }>`
   /* position: fixed; */
   left: ${({ open }) => (open ? '17rem' : '1.225rem')};
   /* top: 3vw; */
-  top: 32px;
+  top: 30px;
 
   width: 2rem;
   height: 2rem;

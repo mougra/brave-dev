@@ -1,4 +1,4 @@
-import { IPost } from '../models/models'
+import { IOperator } from '../models/models'
 import styled from 'styled-components'
 import Link from 'next/link'
 
@@ -103,7 +103,7 @@ const Card = styled.div`
 `
 
 interface PostProps {
-  operator: IPost
+  operator: IOperator
 }
 
 function OperatorCard({ operator }: PostProps) {

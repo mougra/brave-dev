@@ -59,7 +59,7 @@ const StyledMenu = styled.nav<{ open: boolean }>`
 const MenuLogo = styled.div`
   height: 24px;
   padding-top: 5px;
-  padding-bottom: 25px;
+  padding-bottom: 38px;
   padding-left: 1.25rem;
 `
 const ImgContainer = styled.div`
@@ -105,7 +105,7 @@ function Header() {
                     <Image src={Logo} alt='logo' />
                   </MenuLogo>
                 </ImgContainer>
-
+                <a href='#'>Main</a>
                 {/* <NavigationBurger /> */}
               </StyledMenu>
             )}
@@ -119,7 +119,6 @@ function Header() {
           </a>
         </HeaderStyle>
       </Wrapper>
-      {/* {!size.SCREEN_SM && <Navigation />} */}
     </>
   )
 }

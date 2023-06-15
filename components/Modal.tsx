@@ -28,7 +28,7 @@ const ModalContent = styled.div<{ active: string }>`
   font-size: 2rem;
 
   @media (max-width: 622px) {
-    max-width: 12rem;
+    margin: 0 1rem;
   }
 `
 const ModalCloseIcon = styled.div`

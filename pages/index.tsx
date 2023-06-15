@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import data from '../public/operator.json'
-import { IPost } from './../models/models'
+import { IOperator } from './../models/models'
 import Header from '../components/Header'
 import OperatorCard from '../components/OperatorCard'
 import '../src/app/globals.css'
@@ -37,11 +37,11 @@ export default function Index() {
         {data && (
           <>
             <LayoutCards>
-              {data.map((operator: IPost) => (
+              {data.map((operator: IOperator) => (
                 <OperatorCard key={operator.title} operator={operator} />
               ))}
             </LayoutCards>
-            {/* <div id='posts__section'></div> */}
+            {/* <div id='operator__section'></div> */}
           </>
         )}
       </Wrapper>

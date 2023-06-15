@@ -6,9 +6,11 @@ import styled from 'styled-components'
 // import { colors } from '../global'
 import { useOnClickOutside } from '../hook/outside'
 import { useWindowSize } from '../hook/resize'
-import { Size } from '../models/models'
+import { IOperator, Size } from '../models/models'
 import Image from 'next/image'
+import Link from 'next/link'
 // import Search from './Search'
+import data from '../public/operator.json'
 
 const Wrapper = styled.div`
   max-width: 1160px;
@@ -24,6 +26,16 @@ const Wrapper = styled.div`
 
 const Burger = styled.div`
   width: 2rem;
+`
+const BurgerNav = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+
+  padding: 1rem;
+  font-size: 1.5rem;
 `
 const HeaderStyle = styled.div`
   padding: 29px 0 25px;
@@ -105,8 +117,13 @@ function Header() {
                     <Image src={Logo} alt='logo' />
                   </MenuLogo>
                 </ImgContainer>
-                <a href='#'>Main</a>
-                {/* <NavigationBurger /> */}
+                <BurgerNav>
+                  {data.map((operator: IOperator) => (
+                    <Link href={`/operator/${operator.title}`}>
+                      {operator.title}
+                    </Link>
+                  ))}
+                </BurgerNav>
               </StyledMenu>
             )}
             {size.SCREEN_SM && <Hamburger open={open} setOpen={setOpen} />}

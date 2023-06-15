@@ -41,7 +41,7 @@ export default function Index() {
                 <OperatorCard key={operator.title} operator={operator} />
               ))}
             </LayoutCards>
-            {/* <div id='operator__section'></div> */}
+            <div id='operator__section'></div>
           </>
         )}
       </Wrapper>

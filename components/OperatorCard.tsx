@@ -1,9 +1,6 @@
 import { IPost } from '../models/models'
 import styled from 'styled-components'
-// import Modal from './Modal'
-import { useState } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 
 const PostData = styled.div`
   display: flex;
@@ -76,7 +73,6 @@ const Card = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   max-width: 360px;
-  /* width: 100%; */
   width: calc((100% - 2 * 2.5rem) / 3);
 
   transition: all 0.5s ease-in-out;
@@ -111,13 +107,10 @@ interface PostProps {
 }
 
 function OperatorCard({ operator }: PostProps) {
-  const [modalActive, setModalActive] = useState(false)
-
   return (
     <>
-      <Card onClick={() => setModalActive(true)}>
-        <Link href={operator.title}>
-          {/* <Image src={operator.img} width='360' height={231} alt='logo' /> */}
+      <Card>
+        <Link href={`/operator/${operator.title}`}>
           <CardImg
             src={operator.img}
             width='360px'
@@ -136,23 +129,6 @@ function OperatorCard({ operator }: PostProps) {
           <CardText>{operator.text}</CardText>
         </Link>
       </Card>
-      {/* <Modal active={modalActive} setActive={setModalActive}>
-        <CardImg
-          src={post.img}
-          alt='card-img'
-          srcSet={`${post.img} 1x, ${post.img_2x} 2x`}
-          className='layout__card-img'
-        />
-        <CardTheme className='card__theme'>{post.tags}</CardTheme>
-        <CardCaption className='card__caption'>{post.title}</CardCaption>
-        <PostData>
-          <PostDataAuthor>{post.autor}</PostDataAuthor>
-          <Dotted />
-          <div className='card__post-data-date'>{post.date}</div>
-          <Dotted />
-          <div className='card__post-data-views'>{post.views}</div>
-        </PostData>
-      </Modal> */}
     </>
   )
 }

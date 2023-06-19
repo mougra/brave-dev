@@ -2,9 +2,9 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-const StyledHamburger = styled.button<{ open: boolean }>`
+const StyledHamburger = styled.button<{ isOpen: boolean }>`
   position: absolute;
-  left: ${({ open }) => (open ? '17rem' : '1.225rem')};
+  left: ${({ isOpen }) => (isOpen ? '17rem' : '1.225rem')};
   top: 30px;
 
   width: 2rem;
@@ -28,30 +28,34 @@ const StyledHamburger = styled.button<{ open: boolean }>`
     border-radius: 10px;
     transition: all 0.3s linear;
     transform-origin: 1px;
-    background-color: ${({ open }) => (open ? '#000000' : '#000000')};
+    background-color: ${({ isOpen }) => (isOpen ? '#000000' : '#000000')};
 
     &:first-child {
-      transform: ${({ open }) => (open ? 'rotate(45deg)' : 'rotate(0)')};
+      transform: ${({ isOpen }) => (isOpen ? 'rotate(45deg)' : 'rotate(0)')};
     }
 
     &:nth-child(2) {
-      opacity: ${({ open }) => (open ? '0' : '1')};
-      transform: ${({ open }) => (open ? 'translateX(20px)' : 'translateX(0)')};
+      opacity: ${({ isOpen }) => (isOpen ? '0' : '1')};
+      transform: ${({ isOpen }) =>
+        isOpen ? 'translateX(20px)' : 'translateX(0)'};
     }
 
     &:nth-child(3) {
-      transform: ${({ open }) => (open ? 'rotate(-45deg)' : 'rotate(0)')};
+      transform: ${({ isOpen }) => (isOpen ? 'rotate(-45deg)' : 'rotate(0)')};
     }
   }
 `
 
 export type Props = {
-  open: boolean
-  setOpen: (v: boolean) => void
+  isOpen: boolean
+  setIsOpen: (v: boolean) => void
 }
 
 const Hamburger = (props: Props) => (
-  <StyledHamburger open={props.open} onClick={() => props.setOpen(!props.open)}>
+  <StyledHamburger
+    isOpen={props.isOpen}
+    onClick={() => props.setIsOpen(!props.isOpen)}
+  >
     <div />
     <div />
     <div />

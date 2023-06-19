@@ -44,7 +44,7 @@ const HeaderStyle = styled.div`
   align-items: start;
 `
 
-const StyledMenu = styled.nav<{ open: boolean }>`
+const StyledMenu = styled.nav<{ isOpen: boolean }>`
   top: 0;
   left: 0;
   height: 100vh;
@@ -61,7 +61,8 @@ const StyledMenu = styled.nav<{ open: boolean }>`
   border-right: 1px solid #e9e9e9;
 
   transition: transform 0.3s ease-in-out;
-  transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
+  transform: ${({ isOpen }) =>
+    isOpen ? 'translateX(0)' : 'translateX(-100%)'};
 
   @media (max-width: 400px) {
     width: 100vw;
@@ -77,31 +78,31 @@ const MenuLogo = styled.div`
 const ImgContainer = styled.div`
   border-bottom: 1px solid #e9e9e9;
 `
-const MainLogo = styled.div<{ open: boolean }>`
+const MainLogo = styled.div<{ isOpen: boolean }>`
   height: 27px;
 
   @media (max-width: 576px) {
-    opacity: ${({ open }) => (open ? '0' : '1')};
+    opacity: ${({ isOpen }) => (isOpen ? '0' : '1')};
   }
 `
 
-const Overlay = styled.div<{ open: boolean }>`
+const Overlay = styled.div<{ isOpen: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: ${({ open }) => (open ? '10' : '-10')};
+  z-index: ${({ isOpen }) => (isOpen ? '10' : '-10')};
   background-color: rgba(255, 255, 255, 0.7);
 `
 
 function Header() {
-  const [open, setOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const node = useRef<HTMLDivElement>(null)
-  const close = () => setOpen(false)
+  const close = () => setIsOpen(false)
 
-  useOnClickOutside(node, () => setOpen(false))
+  useOnClickOutside(node, () => setIsOpen(false))
 
   const size: Size = useWindowSize()
 
@@ -110,7 +111,7 @@ function Header() {
       <HeaderStyle>
         <Burger ref={node}>
           {size.SCREEN_SM && (
-            <StyledMenu open={open}>
+            <StyledMenu isOpen={isOpen}>
               <ImgContainer>
                 <MenuLogo>
                   <Image src={Logo} alt='logo' />
@@ -128,11 +129,15 @@ function Header() {
               </BurgerNav>
             </StyledMenu>
           )}
-          {size.SCREEN_SM && <Hamburger open={open} setOpen={setOpen} />}
-          {size.SCREEN_SM && <Overlay open={open} onClick={() => close()} />}
+          {size.SCREEN_SM && (
+            <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
+          )}
+          {size.SCREEN_SM && (
+            <Overlay isOpen={isOpen} onClick={() => close()} />
+          )}
         </Burger>
         <a href='#'>
-          <MainLogo open={open}>
+          <MainLogo isOpen={isOpen}>
             <Image src={Logo} alt='logo' />
           </MainLogo>
         </a>

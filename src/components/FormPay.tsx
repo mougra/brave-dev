@@ -128,7 +128,7 @@ type FormData = {
 
 export default function Form() {
   const router = useRouter()
-  const [modalActive, setModalActive] = useState(false)
+  const [isModalActive, setIsModalActive] = useState<boolean>(false)
   const {
     register,
     handleSubmit,
@@ -149,12 +149,12 @@ export default function Form() {
       (value: any) => setData(value),
       (value: any) => setData(value)
     )
-    setModalActive(true)
+    setIsModalActive(true)
   }
 
   function NavigateHandler(data: any) {
     if (data) router.push('/')
-    else setModalActive(false)
+    else setIsModalActive(false)
   }
 
   const getDataFromServer = async () => {
@@ -224,7 +224,7 @@ export default function Form() {
         />
       </form>
 
-      <Modal active={modalActive} setActive={setModalActive}>
+      <Modal isActive={isModalActive} setIsActive={setIsModalActive}>
         {data === null && <SpanModal>Loading...</SpanModal>}
         {data?.payment && data !== null && (
           <SpanModal>Оплата прошла успешно</SpanModal>

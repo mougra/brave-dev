@@ -1,15 +1,12 @@
 import { useRef, useState } from 'react'
 import Logo from '../../public/Logotype.svg'
-// import LogoS from '../assets/svg/Logotype-s.svg'
 import Hamburger from './Hamburger'
 import styled from 'styled-components'
-// import { colors } from '../global'
 import { useOnClickOutside } from '../hook/outside'
 import { useWindowSize } from '../hook/resize'
 import { IOperator, Size } from '../models/models'
 import Image from 'next/image'
 import Link from 'next/link'
-// import Search from './Search'
 import data from '../../public/operator.json'
 
 const Wrapper = styled.div`
@@ -44,7 +41,7 @@ const HeaderStyle = styled.div`
   align-items: start;
 `
 
-const StyledMenu = styled.nav<{ isOpen: boolean }>`
+const StyledMenu = styled.nav<{ open: boolean }>`
   top: 0;
   left: 0;
   height: 100vh;
@@ -61,8 +58,7 @@ const StyledMenu = styled.nav<{ isOpen: boolean }>`
   border-right: 1px solid #e9e9e9;
 
   transition: transform 0.3s ease-in-out;
-  transform: ${({ isOpen }) =>
-    isOpen ? 'translateX(0)' : 'translateX(-100%)'};
+  transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
 
   @media (max-width: 400px) {
     width: 100vw;
@@ -78,21 +74,21 @@ const MenuLogo = styled.div`
 const ImgContainer = styled.div`
   border-bottom: 1px solid #e9e9e9;
 `
-const MainLogo = styled.div<{ isOpen: boolean }>`
+const MainLogo = styled.div<{ open: boolean }>`
   height: 27px;
 
   @media (max-width: 576px) {
-    opacity: ${({ isOpen }) => (isOpen ? '0' : '1')};
+    opacity: ${({ open }) => (open ? '0' : '1')};
   }
 `
 
-const Overlay = styled.div<{ isOpen: boolean }>`
+const Overlay = styled.div<{ open: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
   width: 100vw;
   height: 100vh;
-  z-index: ${({ isOpen }) => (isOpen ? '10' : '-10')};
+  z-index: ${({ open }) => (open ? '10' : '-10')};
   background-color: rgba(255, 255, 255, 0.7);
 `
 
@@ -111,7 +107,7 @@ function Header() {
       <HeaderStyle>
         <Burger ref={node}>
           {size.SCREEN_SM && (
-            <StyledMenu isOpen={isOpen}>
+            <StyledMenu open={isOpen}>
               <ImgContainer>
                 <MenuLogo>
                   <Image src={Logo} alt='logo' />
@@ -133,11 +129,11 @@ function Header() {
             <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
           )}
           {size.SCREEN_SM && (
-            <Overlay isOpen={isOpen} onClick={() => handleClose()} />
+            <Overlay open={isOpen} onClick={() => handleClose()} />
           )}
         </Burger>
         <a href='#'>
-          <MainLogo isOpen={isOpen}>
+          <MainLogo open={isOpen}>
             <Image src={Logo} alt='logo' />
           </MainLogo>
         </a>

@@ -4,6 +4,8 @@ import styled from 'styled-components'
 import Modal from './Modal'
 import { useRouter } from 'next/navigation'
 import MaskedInput from 'react-input-mask'
+import { VALIDATE_NUMBER } from '../constains/validateNumber'
+import { VALIDATE_SUM } from '../constains/validateSum'
 
 const ButtonNavigate = styled.button`
   max-width: 280px;
@@ -175,20 +177,7 @@ export default function Form() {
           id='sum'
           type='number'
           defaultValue='50'
-          {...register('sum', {
-            required: {
-              value: true,
-              message: 'Please add your sum',
-            },
-            min: {
-              value: 1,
-              message: '...Minimum payment amount 1',
-            },
-            max: {
-              value: 1000,
-              message: '...Minimum payment amount 1000',
-            },
-          })}
+          {...register('sum', VALIDATE_SUM)}
         />
         {errors.sum && <p>{errors.sum.message}</p>}
 
@@ -199,22 +188,7 @@ export default function Form() {
           mask={'+7 (999) 999-99-99'}
           alwaysShowMask={false}
           placeholder='Ex: +7 (999) 999-99-99'
-          {...register('phone', {
-            required: {
-              value: true,
-              message:
-                "Please add your mobile phone number, I won't call you, promise!",
-            },
-            pattern: {
-              value: /^[0-9+-\s\(\)]+$/,
-              message: 'This is not a valid mobile phone to me, try again!',
-            },
-            maxLength: {
-              value: 18,
-              message:
-                "...And now it's too damn long, make sure the number is right, would you?",
-            },
-          })}
+          {...register('phone', VALIDATE_NUMBER)}
         />
         {errors.phone && <p>{errors.phone.message}</p>}
         <input

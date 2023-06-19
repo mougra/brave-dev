@@ -36,6 +36,7 @@ const OperatorText = styled.div`
 `
 
 const CardContainer = styled.div`
+  max-width: 435px;
   width: fit-content;
   margin: 0 auto;
   padding: 56px 68px;

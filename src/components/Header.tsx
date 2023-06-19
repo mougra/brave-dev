@@ -1,5 +1,5 @@
 import { useRef, useState } from 'react'
-import Logo from '../public/Logotype.svg'
+import Logo from '../../public/Logotype.svg'
 // import LogoS from '../assets/svg/Logotype-s.svg'
 import Hamburger from './Hamburger'
 import styled from 'styled-components'
@@ -10,7 +10,7 @@ import { IOperator, Size } from '../models/models'
 import Image from 'next/image'
 import Link from 'next/link'
 // import Search from './Search'
-import data from '../public/operator.json'
+import data from '../../public/operator.json'
 
 const Wrapper = styled.div`
   max-width: 1160px;
@@ -106,40 +106,38 @@ function Header() {
   const size: Size = useWindowSize()
 
   return (
-    <>
-      <Wrapper>
-        <HeaderStyle>
-          <Burger ref={node}>
-            {size.SCREEN_SM && (
-              <StyledMenu open={open}>
-                <ImgContainer>
-                  <MenuLogo>
-                    <Image src={Logo} alt='logo' />
-                  </MenuLogo>
-                </ImgContainer>
-                <BurgerNav>
-                  {data.map((operator: IOperator) => (
-                    <Link
-                      key={operator.title}
-                      href={`/operator/${operator.title}`}
-                    >
-                      {operator.title}
-                    </Link>
-                  ))}
-                </BurgerNav>
-              </StyledMenu>
-            )}
-            {size.SCREEN_SM && <Hamburger open={open} setOpen={setOpen} />}
-            {size.SCREEN_SM && <Overlay open={open} onClick={() => close()} />}
-          </Burger>
-          <a href='#'>
-            <MainLogo open={open}>
-              <Image src={Logo} alt='logo' />
-            </MainLogo>
-          </a>
-        </HeaderStyle>
-      </Wrapper>
-    </>
+    <Wrapper>
+      <HeaderStyle>
+        <Burger ref={node}>
+          {size.SCREEN_SM && (
+            <StyledMenu open={open}>
+              <ImgContainer>
+                <MenuLogo>
+                  <Image src={Logo} alt='logo' />
+                </MenuLogo>
+              </ImgContainer>
+              <BurgerNav>
+                {data.map((operator: IOperator) => (
+                  <Link
+                    key={operator.title}
+                    href={`/operator/${operator.title}`}
+                  >
+                    {operator.title}
+                  </Link>
+                ))}
+              </BurgerNav>
+            </StyledMenu>
+          )}
+          {size.SCREEN_SM && <Hamburger open={open} setOpen={setOpen} />}
+          {size.SCREEN_SM && <Overlay open={open} onClick={() => close()} />}
+        </Burger>
+        <a href='#'>
+          <MainLogo open={open}>
+            <Image src={Logo} alt='logo' />
+          </MainLogo>
+        </a>
+      </HeaderStyle>
+    </Wrapper>
   )
 }
 

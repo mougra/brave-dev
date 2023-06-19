@@ -1,9 +1,9 @@
 import styled from 'styled-components'
-import data from '../public/operator.json'
+import data from '../../public/operator.json'
 import { IOperator } from './../models/models'
 import Header from '../components/Header'
 import OperatorCard from '../components/OperatorCard'
-import '../src/app/globals.css'
+import '../app/globals.css'
 
 const Wrapper = styled.div`
   max-width: 1160px;

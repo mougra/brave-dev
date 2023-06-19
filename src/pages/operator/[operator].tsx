@@ -1,7 +1,8 @@
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
-import '../../src/app/globals.css'
+import '../../app/globals.css'
 import FormPay from '../../components/FormPay'
+import data from '../../../public/operator.json'
 
 const Layout = styled.div`
   background-image: linear-gradient(90.6deg, #e66374 -25.85%, #f2e265 118.6%);
@@ -26,6 +27,7 @@ const Wrapper = styled.div`
 `
 
 const OperatorText = styled.div`
+  text-align: center;
   font-size: 2rem;
   color: transparent;
   -webkit-background-clip: text;
@@ -58,22 +60,41 @@ const CardContainer = styled.div`
   }
 `
 
+export const getStaticPaths = async () => {
+  const paths = data.map(({ title }) => ({
+    params: { operator: title },
+  }))
+
+  return {
+    paths,
+    fallback: false,
+  }
+}
+
+export const getStaticProps = async () => {
+  if (!data) {
+    return {
+      notFound: true,
+    }
+  }
+
+  return {
+    props: { operator: data },
+  }
+}
+
 export default function Operator() {
   const { query } = useRouter()
 
   return (
-    <>
-      <Layout>
-        <Wrapper>
-          <CardContainer>
-            <h2>
-              ПОПОЛНЕНИЕ БАЛАНСА
-              <OperatorText>{query.operator}</OperatorText>
-            </h2>
-            <FormPay />
-          </CardContainer>
-        </Wrapper>
-      </Layout>
-    </>
+    <Layout>
+      <Wrapper>
+        <CardContainer>
+          <h2>ПОПОЛНЕНИЕ БАЛАНСА</h2>
+          <OperatorText>{query.operator}</OperatorText>
+          <FormPay />
+        </CardContainer>
+      </Wrapper>
+    </Layout>
   )
 }

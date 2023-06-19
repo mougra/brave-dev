@@ -108,28 +108,26 @@ interface PostProps {
 
 function OperatorCard({ operator }: PostProps) {
   return (
-    <>
-      <Card>
-        <Link href={`/operator/${operator.title}`}>
-          <CardImg
-            src={operator.img}
-            width='360px'
-            height='231px'
-            alt='card-img'
-          />
-          <CardTheme>{operator.tags}</CardTheme>
-          <CardCaption>{operator.title}</CardCaption>
-          <PostData>
-            <PostDataAuthor>{operator.autor}</PostDataAuthor>
-            <Dotted />
-            <div>{operator.date}</div>
-            <Dotted />
-            <div>{operator.views}</div>
-          </PostData>
-          <CardText>{operator.text}</CardText>
-        </Link>
-      </Card>
-    </>
+    <Card>
+      <Link href={`/operator/${operator.title}`}>
+        <CardImg
+          src={operator.img}
+          width='360px'
+          height='231px'
+          alt='card-img'
+        />
+        <CardTheme>{operator.tags}</CardTheme>
+        <CardCaption>{operator.title}</CardCaption>
+        <PostData>
+          <PostDataAuthor>{operator.autor}</PostDataAuthor>
+          <Dotted />
+          <div>{operator.date}</div>
+          <Dotted />
+          <div>{operator.views}</div>
+        </PostData>
+        <CardText>{operator.text}</CardText>
+      </Link>
+    </Card>
   )
 }
 

@@ -2,13 +2,9 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-// import { colors } from '../global'
-
 const StyledHamburger = styled.button<{ open: boolean }>`
   position: absolute;
-  /* position: fixed; */
   left: ${({ open }) => (open ? '17rem' : '1.225rem')};
-  /* top: 3vw; */
   top: 30px;
 
   width: 2rem;
@@ -24,10 +20,6 @@ const StyledHamburger = styled.button<{ open: boolean }>`
   cursor: pointer;
   outline: none;
   z-index: 20;
-
-  /* @media (min-width: 577px) {
-    opacity: 0;
-  } */
 
   div {
     position: relative;

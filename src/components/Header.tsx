@@ -100,7 +100,7 @@ function Header() {
   const [isOpen, setIsOpen] = useState<boolean>(false)
 
   const node = useRef<HTMLDivElement>(null)
-  const close = () => setIsOpen(false)
+  const handleClose = () => setIsOpen(false)
 
   useOnClickOutside(node, () => setIsOpen(false))
 
@@ -133,7 +133,7 @@ function Header() {
             <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
           )}
           {size.SCREEN_SM && (
-            <Overlay isOpen={isOpen} onClick={() => close()} />
+            <Overlay isOpen={isOpen} onClick={() => handleClose()} />
           )}
         </Burger>
         <a href='#'>

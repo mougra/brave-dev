@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import data from '../../public/operator.json'
+import OPERATORS from '../../public/operator.json'
 import { IOperator } from './../models/models'
 import Header from '../components/Header'
 import OperatorCard from '../components/OperatorCard'
@@ -31,13 +31,13 @@ export default function Index() {
     <>
       <Header />
       <Wrapper>
-        {!data && (
+        {!OPERATORS && (
           <p>Усп. Кажется кажетсячто-то пошло не так. Только без паники!</p>
         )}
-        {data && (
+        {OPERATORS && (
           <>
             <LayoutCards>
-              {data.map((operator: IOperator) => (
+              {OPERATORS.map((operator: IOperator) => (
                 <OperatorCard key={operator.title} operator={operator} />
               ))}
             </LayoutCards>

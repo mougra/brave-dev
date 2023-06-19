@@ -1,7 +1,7 @@
-import React, { ReactNode } from 'react'
+import { ReactNode } from 'react'
 import styled from 'styled-components'
 
-const ModalContainer = styled.div<{ isActive: string }>`
+const ModalContainer = styled.div<{ active: string }>`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.4);
@@ -14,17 +14,16 @@ const ModalContainer = styled.div<{ isActive: string }>`
   transition: all 0.5s ease-in-out;
   z-index: 10;
 
-  opacity: ${({ isActive }) => (isActive === 'true' ? '1' : '0')};
-  pointer-events: ${({ isActive }) => (isActive === 'true' ? 'all' : 'none')};
+  opacity: ${({ active }) => (active === 'true' ? '1' : '0')};
+  pointer-events: ${({ active }) => (active === 'true' ? 'all' : 'none')};
 `
-const ModalContent = styled.div<{ isActive: string }>`
+const ModalContent = styled.div<{ active: string }>`
   padding: 1.25rem;
   border-radius: 0.75rem;
   background-color: white;
   transition: all 0.4s ease-in-out;
   max-width: 20rem;
-  transform: ${({ isActive }) =>
-    isActive === 'true' ? 'scale(1)' : 'scale(0.5)'};
+  transform: ${({ active }) => (active === 'true' ? 'scale(1)' : 'scale(0.5)')};
 
   font-size: 2rem;
 
@@ -60,18 +59,19 @@ export type ModalProps = {
   children: ReactNode
 }
 
-const Modal = ({ isActive, setIsActive, children }: ModalProps) => {
+const Modal = ({
+  isActive: active,
+  setIsActive: setActive,
+  children,
+}: ModalProps) => {
   return (
-    <ModalContainer
-      isActive={isActive.toString()}
-      onClick={() => setIsActive(false)}
-    >
+    <ModalContainer active={active.toString()} onClick={() => setActive(false)}>
       <ModalContent
-        isActive={isActive.toString()}
+        active={active.toString()}
         onClick={(e) => e.stopPropagation()}
       >
         {children}
-        <ModalCloseIcon onClick={() => setIsActive(false)}>
+        <ModalCloseIcon onClick={() => setActive(false)}>
           <svg
             width='52'
             height='52'

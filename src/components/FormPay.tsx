@@ -136,34 +136,32 @@ export default function Form() {
   } = useForm<FormData>()
 
   interface DataType {
-    payment?: string
+    payment: 'pending' | 'resolve' | 'reject'
   }
 
-  const [data, setData] = useState<null | DataType>(null)
+  const [formData, setData] = useState<DataType>({ payment: 'pending' })
 
   const onSubmit: SubmitHandler<FormData> = (dataSubmit) => {
-    console.log(dataSubmit)
-
-    setData(null)
+    setData({ payment: 'pending' })
     getDataFromServer().then(
-      (value: any) => setData(value),
-      (value: any) => setData(value)
+      (value: DataType) => setData(value),
+      (value: DataType) => setData(value)
     )
     setIsModalActive(true)
   }
 
-  function NavigateHandler(data: any) {
-    if (data) router.push('/')
+  function handleNavigate(isSuccess: boolean) {
+    if (isSuccess) router.push('/')
     else setIsModalActive(false)
   }
 
   const getDataFromServer = async () => {
-    return await new Promise((resolve, reject) => {
+    return await new Promise<DataType>((resolve, reject) => {
       setTimeout(
         () =>
           Math.random() > 0.5
-            ? resolve({ payment: true })
-            : reject({ payment: false }),
+            ? resolve({ payment: 'resolve' })
+            : reject({ payment: 'reject' }),
         1000
       )
     })
@@ -172,8 +170,9 @@ export default function Form() {
   return (
     <FormContainer>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label>Сумма</label>
+        <label htmlFor='sum'>Сумма</label>
         <input
+          id='sum'
           type='number'
           defaultValue='50'
           {...register('sum', {
@@ -193,8 +192,9 @@ export default function Form() {
         />
         {errors.sum && <p>{errors.sum.message}</p>}
 
-        <label>Номер телефона</label>
+        <label htmlFor='number-phone'>Номер телефона</label>
         <MaskedInput
+          id='number-phone'
           type='tel'
           mask={'+7 (999) 999-99-99'}
           alwaysShowMask={false}
@@ -225,17 +225,22 @@ export default function Form() {
       </form>
 
       <Modal isActive={isModalActive} setIsActive={setIsModalActive}>
-        {data === null && <SpanModal>Loading...</SpanModal>}
-        {data?.payment && data !== null && (
-          <SpanModal>Оплата прошла успешно</SpanModal>
-        )}
-        {!data?.payment && data !== null && (
-          <SpanModal>Оплата не прошла</SpanModal>
-        )}
-        {data !== null && (
-          <ButtonNavigate onClick={() => NavigateHandler(data?.payment)}>
-            {data?.payment ? 'Вернуться на главную' : 'Попробовать ещё раз'}
-          </ButtonNavigate>
+        {formData.payment === 'pending' ? (
+          <SpanModal>Loading...</SpanModal>
+        ) : formData.payment === 'resolve' ? (
+          <>
+            <SpanModal>Оплата прошла успешно</SpanModal>
+            <ButtonNavigate onClick={() => handleNavigate(true)}>
+              Вернуться на главную
+            </ButtonNavigate>
+          </>
+        ) : (
+          <>
+            <SpanModal>Оплата не прошла</SpanModal>
+            <ButtonNavigate onClick={() => handleNavigate(false)}>
+              Попробовать ещё раз
+            </ButtonNavigate>
+          </>
         )}
       </Modal>
     </FormContainer>

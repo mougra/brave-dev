@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import '../../app/globals.css'
 import FormPay from '../../components/FormPay'
-import data from '../../../public/operator.json'
+import OPERATORS from '../../../public/operator.json'
 
 const Layout = styled.div`
   background-image: linear-gradient(90.6deg, #e66374 -25.85%, #f2e265 118.6%);
@@ -61,7 +61,7 @@ const CardContainer = styled.div`
 `
 
 export const getStaticPaths = async () => {
-  const paths = data.map(({ title }) => ({
+  const paths = OPERATORS.map(({ title }) => ({
     params: { operator: title },
   }))
 
@@ -72,14 +72,14 @@ export const getStaticPaths = async () => {
 }
 
 export const getStaticProps = async () => {
-  if (!data) {
+  if (!OPERATORS) {
     return {
       notFound: true,
     }
   }
 
   return {
-    props: { operator: data },
+    props: { operator: OPERATORS },
   }
 }
 

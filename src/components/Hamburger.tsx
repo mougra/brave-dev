@@ -1,5 +1,3 @@
-import React from 'react'
-
 import styled from 'styled-components'
 
 const StyledHamburger = styled.button<{ isOpen: boolean }>`
@@ -51,11 +49,8 @@ export type Props = {
   setIsOpen: (v: boolean) => void
 }
 
-const Hamburger = (props: Props) => (
-  <StyledHamburger
-    isOpen={props.isOpen}
-    onClick={() => props.setIsOpen(!props.isOpen)}
-  >
+const Hamburger = ({ isOpen, setIsOpen }: Props) => (
+  <StyledHamburger isOpen={isOpen} onClick={() => setIsOpen(!isOpen)}>
     <div />
     <div />
     <div />

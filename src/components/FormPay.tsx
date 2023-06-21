@@ -4,8 +4,7 @@ import styled from 'styled-components'
 import Modal from './Modal'
 import { useRouter } from 'next/navigation'
 import MaskedInput from 'react-input-mask'
-import { VALIDATE_NUMBER } from '../constains/validateNumber'
-import { VALIDATE_SUM } from '../constains/validateSum'
+import { VALIDATE_NUMBER, VALIDATE_SUM } from '../constants/validation'
 
 const ButtonNavigate = styled.button`
   max-width: 280px;
@@ -88,7 +87,8 @@ const FormContainer = styled.div`
 
   button[type='submit'],
   input[type='submit'] {
-    max-width: 280px;
+    max-width: 260px;
+    margin: 0 auto;
     background: #fe8c21;
     color: black;
     border: none;
@@ -130,7 +130,7 @@ type FormData = {
 
 export default function Form() {
   const router = useRouter()
-  const [isModalActive, setIsModalActive] = useState<boolean>(false)
+  const [isModalActive, setIsModalActive] = useState(false)
   const {
     register,
     handleSubmit,
@@ -172,7 +172,7 @@ export default function Form() {
   return (
     <FormContainer>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <label htmlFor='sum'>Сумма</label>
+        <label htmlFor='sum'>Сумма*</label>
         <input
           id='sum'
           type='number'
@@ -181,7 +181,7 @@ export default function Form() {
         />
         {errors.sum && <p>{errors.sum.message}</p>}
 
-        <label htmlFor='number-phone'>Номер телефона</label>
+        <label htmlFor='number-phone'>Номер телефона*</label>
         <MaskedInput
           id='number-phone'
           type='tel'

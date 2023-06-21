@@ -93,7 +93,7 @@ const Overlay = styled.div<{ open: boolean }>`
 `
 
 function Header() {
-  const [isOpen, setIsOpen] = useState<boolean>(false)
+  const [isOpen, setIsOpen] = useState(false)
 
   const node = useRef<HTMLDivElement>(null)
   const handleClose = () => setIsOpen(false)

@@ -32,17 +32,14 @@ export default function Index() {
       <Header />
       <Wrapper>
         {!OPERATORS && (
-          <p>Усп. Кажется кажетсячто-то пошло не так. Только без паники!</p>
+          <p>Усп. Кажется что-то пошло не так. Только без паники!</p>
         )}
         {OPERATORS && (
-          <>
-            <LayoutCards>
-              {OPERATORS.map((operator: IOperator) => (
-                <OperatorCard key={operator.title} operator={operator} />
-              ))}
-            </LayoutCards>
-            <div id='operator__section'></div>
-          </>
+          <LayoutCards>
+            {OPERATORS.map((operator: IOperator) => (
+              <OperatorCard key={operator.title} operator={operator} />
+            ))}
+          </LayoutCards>
         )}
       </Wrapper>
     </>

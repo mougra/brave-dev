@@ -7,19 +7,17 @@ const PostData = styled.div`
   flex-wrap: wrap;
   gap: 5px;
   align-items: center;
-
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.75rem;
   line-height: 0.75rem;
   color: #9b9b9b;
-
   margin: 0 0 1rem 0;
 `
 
 const CardTheme = styled.h4`
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 15px;
@@ -27,8 +25,9 @@ const CardTheme = styled.h4`
   color: #eb0028;
   margin: 1rem 0;
 `
+
 const CardCaption = styled.h2`
-  font-family: 'Roboto';
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 700;
   font-size: 1.5rem;
@@ -36,18 +35,21 @@ const CardCaption = styled.h2`
   color: #000000;
   margin: 0 0 1rem 0;
 `
-const PostDataAuthor = styled.div`
+
+const PostDataAuthor = styled.span`
   color: #000000;
   font-weight: 500;
 `
+
 const Dotted = styled.div`
   width: 3px;
   height: 3px;
   background: #d7d7d7;
   border-radius: 50%;
 `
-const CardText = styled.div`
-  font-family: 'Roboto';
+
+const CardText = styled.span`
+  font-family: 'Roboto', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 0.875rem;
@@ -57,8 +59,7 @@ const CardText = styled.div`
 
 const CardImg = styled.img`
   width: 100%;
-  max-width: 360px;
-  background-size: cover;
+  object-fit: fill;
   height: 231px;
 
   @media (max-width: 992px) {
@@ -114,16 +115,16 @@ function OperatorCard({ operator }: PostProps) {
           src={operator.img}
           width='360px'
           height='231px'
-          alt='card-img'
+          alt='operator'
         />
         <CardTheme>{operator.tags}</CardTheme>
         <CardCaption>{operator.title}</CardCaption>
         <PostData>
           <PostDataAuthor>{operator.autor}</PostDataAuthor>
           <Dotted />
-          <div>{operator.date}</div>
+          <span>{operator.date}</span>
           <Dotted />
-          <div>{operator.views}</div>
+          <span>{operator.views}</span>
         </PostData>
         <CardText>{operator.text}</CardText>
       </Link>

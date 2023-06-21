@@ -13,3 +13,18 @@ export const VALIDATE_NUMBER = {
       "...And now it's too damn long, make sure the number is right, would you?",
   },
 }
+
+export const VALIDATE_SUM = {
+  required: {
+    value: true,
+    message: 'Please add your sum',
+  },
+  min: {
+    value: 1,
+    message: '...Minimum payment amount 1',
+  },
+  max: {
+    value: 1000,
+    message: '...Maximum payment amount 1000',
+  },
+}

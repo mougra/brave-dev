@@ -26,8 +26,7 @@ const Wrapper = styled.div`
   }
 `
 
-const OperatorText = styled.div`
-  text-align: center;
+const OperatorText = styled.span`
   font-size: 2rem;
   color: transparent;
   -webkit-background-clip: text;
@@ -41,6 +40,7 @@ const CardContainer = styled.div`
   margin: 0 auto;
   padding: 56px 68px;
   background-color: white;
+  text-align: center;
 
   border-radius: 20px;
   > h2 {

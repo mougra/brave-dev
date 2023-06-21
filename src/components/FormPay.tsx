@@ -138,13 +138,19 @@ export default function Form() {
   } = useForm<FormData>()
 
   interface DataType {
-    payment: 'pending' | 'resolve' | 'reject'
+    payment: PaymentType
   }
 
-  const [formData, setData] = useState<DataType>({ payment: 'pending' })
+  enum PaymentType {
+    pending,
+    resolve,
+    reject,
+  }
+
+  const [formData, setData] = useState<DataType>({ payment: 0 })
 
   const onSubmit: SubmitHandler<FormData> = (dataSubmit) => {
-    setData({ payment: 'pending' })
+    setData({ payment: 0 })
     getDataFromServer().then(
       (value: DataType) => setData(value),
       (value: DataType) => setData(value)
@@ -162,8 +168,8 @@ export default function Form() {
       setTimeout(
         () =>
           Math.random() > 0.5
-            ? resolve({ payment: 'resolve' })
-            : reject({ payment: 'reject' }),
+            ? resolve({ payment: 1 })
+            : reject({ payment: 2 }),
         1000
       )
     })
@@ -194,14 +200,14 @@ export default function Form() {
         <input
           type='submit'
           value='Пополнить'
-          disabled={errors.phone || errors.sum ? true : false}
+          disabled={errors.phone || errors.sum || isModalActive ? true : false}
         />
       </form>
 
       <Modal isActive={isModalActive} setIsActive={setIsModalActive}>
-        {formData.payment === 'pending' ? (
+        {formData.payment === 0 ? (
           <SpanModal>Loading...</SpanModal>
-        ) : formData.payment === 'resolve' ? (
+        ) : formData.payment === 1 ? (
           <>
             <SpanModal>Оплата прошла успешно</SpanModal>
             <ButtonNavigate onClick={() => handleNavigate(true)}>

@@ -1,7 +1,7 @@
 import { ReactNode } from 'react'
 import styled from 'styled-components'
 
-const ModalContainer = styled.div<{ active: boolean }>`
+const ModalContainer = styled.div<{ isActive: boolean }>`
   height: 100vh;
   width: 100vw;
   background-color: rgba(0, 0, 0, 0.4);
@@ -13,16 +13,16 @@ const ModalContainer = styled.div<{ active: boolean }>`
   justify-content: center;
   transition: all 0.5s ease-in-out;
   z-index: 10;
-  opacity: ${({ active }) => (active ? '1' : '0')};
-  pointer-events: ${({ active }) => (active ? 'all' : 'none')};
+  opacity: ${({ isActive }) => (isActive ? '1' : '0')};
+  pointer-events: ${({ isActive }) => (isActive ? 'all' : 'none')};
 `
-const ModalContent = styled.div<{ active: boolean }>`
+const ModalContent = styled.div<{ isActive: boolean }>`
   padding: 1.25rem;
   border-radius: 0.75rem;
   background-color: white;
   transition: all 0.4s ease-in-out;
   max-width: 20rem;
-  transform: ${({ active }) => (active ? 'scale(1)' : 'scale(0.5)')};
+  transform: ${({ isActive }) => (isActive ? 'scale(1)' : 'scale(0.5)')};
 
   font-size: 2rem;
 
@@ -60,8 +60,8 @@ export type ModalProps = {
 
 const Modal = ({ isActive, setIsActive, children }: ModalProps) => {
   return (
-    <ModalContainer active={isActive} onClick={() => setIsActive(false)}>
-      <ModalContent active={isActive} onClick={(e) => e.stopPropagation()}>
+    <ModalContainer isActive={isActive} onClick={() => setIsActive(false)}>
+      <ModalContent isActive={isActive} onClick={(e) => e.stopPropagation()}>
         {children}
         <ModalCloseIcon onClick={() => setIsActive(false)}>
           <svg

@@ -1,14 +1,14 @@
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
-import '../../app/globals.css'
-import FormPay from '../../components/FormPay'
-import OPERATORS from '../../../public/operator.json'
+import '../app/globals.css'
+import FormPay from '../components/FormPay'
+import OPERATORS from '../../public/operator.json'
+import Background from '@/components/Background'
 
 const Layout = styled.div`
-  background-image: linear-gradient(90.6deg, #e66374 -25.85%, #f2e265 118.6%);
   margin: 0;
-  min-height: 100vh;
-  padding: 1rem 0;
+  height: 100%;
+  padding: 3rem 0;
   display: flex;
   align-items: center;
 `
@@ -31,16 +31,18 @@ const OperatorText = styled.span`
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  background-image: linear-gradient(#f3fb00, #ff08089f);
+  background-image: linear-gradient(#95bff8, #d77ea6);
+  font-weight: 700;
 `
 
 const CardContainer = styled.div`
   max-width: 435px;
   width: fit-content;
   margin: 0 auto;
-  padding: 56px 68px;
+  padding: 26px 38px;
   background-color: white;
   text-align: center;
+  border: 1px dashed hsla(0, 0%, 64%, 0.6);
 
   border-radius: 20px;
   > h2 {
@@ -89,9 +91,9 @@ export default function Operator() {
 
   return (
     <Layout>
+      <Background />
       <Wrapper>
         <CardContainer>
-          <h2>ПОПОЛНЕНИЕ БАЛАНСА</h2>
           <OperatorText>{query.operator}</OperatorText>
           <FormPay />
         </CardContainer>

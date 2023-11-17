@@ -1,4 +1,5 @@
 export interface IOperator {
+  id: number
   title: string
   text: string
   tags: string
@@ -6,10 +7,4 @@ export interface IOperator {
   img: string
   date: string
   views: string
-}
-
-export interface Size {
-  width: number | undefined
-  // height: number | undefined
-  SCREEN_SM: boolean
 }

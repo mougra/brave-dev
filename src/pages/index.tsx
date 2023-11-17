@@ -4,8 +4,9 @@ import { IOperator } from './../models/models'
 import Header from '../components/Header'
 import OperatorCard from '../components/OperatorCard'
 import '../app/globals.css'
+import Background from '@/components/Background'
 
-const Wrapper = styled.div`
+const Section = styled.section`
   max-width: 1160px;
   margin: 0 auto;
   padding: 0 0.625rem;
@@ -30,18 +31,17 @@ export default function Index() {
   return (
     <>
       <Header />
-      <Wrapper>
-        {!OPERATORS && (
-          <p>Усп. Кажется что-то пошло не так. Только без паники!</p>
-        )}
+      <Background />
+      <Section>
+        {!OPERATORS && <p>Усп. Кажется что-то пошло не так.</p>}
         {OPERATORS && (
           <LayoutCards>
             {OPERATORS.map((operator: IOperator) => (
-              <OperatorCard key={operator.title} operator={operator} />
+              <OperatorCard key={operator.id} operator={operator} />
             ))}
           </LayoutCards>
         )}
-      </Wrapper>
+      </Section>
     </>
   )
 }

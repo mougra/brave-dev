@@ -1,6 +1,7 @@
 import { IOperator } from '../models/models'
 import styled from 'styled-components'
 import Link from 'next/link'
+import ButtonPay from './ButtonPay'
 
 const PostData = styled.div`
   display: flex;
@@ -22,8 +23,14 @@ const CardTheme = styled.h4`
   font-weight: 700;
   font-size: 15px;
   line-height: 15px;
-  color: #eb0028;
+  color: #d77ea6;
   margin: 1rem 0;
+`
+const CardContainer = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 10px;
 `
 
 const CardCaption = styled.h2`
@@ -32,8 +39,9 @@ const CardCaption = styled.h2`
   font-weight: 700;
   font-size: 1.5rem;
   line-height: 30px;
-  color: #000000;
+  color: #598ed7;
   margin: 0 0 1rem 0;
+  margin: inherit;
 `
 
 const PostDataAuthor = styled.span`
@@ -61,6 +69,9 @@ const CardImg = styled.img`
   width: 100%;
   object-fit: fill;
   height: 231px;
+  border-radius: 8px;
+
+  transition: transform 0.4s ease-in-out;
 
   @media (max-width: 992px) {
     max-width: 500px;
@@ -75,14 +86,19 @@ const Card = styled.div`
   flex-direction: column;
   max-width: 360px;
   width: calc((100% - 2 * 2.5rem) / 3);
+  background: #fff;
+  border: 1px dashed hsla(0, 0%, 64%, 0.6);
+  border-radius: 12px;
+  padding: 15px;
 
   transition: all 0.5s ease-in-out;
 
+  &:hover img {
+    transform: rotate(1deg);
+  }
+
   &:hover {
-    cursor: pointer;
-    transform: scale(1.02);
-    box-shadow: -20px 20px 0 -17px #eee, 20px -20px 0 -17px #eee,
-      20px 20px 0 -20px #592385, 0 0 0 2px #592385;
+    box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.25);
   }
 
   > a {
@@ -102,7 +118,6 @@ const Card = styled.div`
     max-width: 576px;
   }
 `
-
 interface PostProps {
   operator: IOperator
 }
@@ -110,24 +125,23 @@ interface PostProps {
 function OperatorCard({ operator }: PostProps) {
   return (
     <Card>
-      <Link href={`/operator/${operator.title}`}>
-        <CardImg
-          src={operator.img}
-          width='360px'
-          height='231px'
-          alt='operator'
-        />
-        <CardTheme>{operator.tags}</CardTheme>
-        <CardCaption>{operator.title}</CardCaption>
-        <PostData>
-          <PostDataAuthor>{operator.autor}</PostDataAuthor>
-          <Dotted />
-          <span>{operator.date}</span>
-          <Dotted />
-          <span>{operator.views}</span>
-        </PostData>
-        <CardText>{operator.text}</CardText>
-      </Link>
+      <CardImg src={operator.img} width='360px' height='231px' alt='operator' />
+      <CardTheme>{operator.tags}</CardTheme>
+
+      <CardContainer>
+        <CardCaption>{operator.title}</CardCaption>{' '}
+        {/* <Link href={`/operator/${operator.title}`}> */}
+        <ButtonPay operator={operator.title} /> {/* </Link> */}
+      </CardContainer>
+
+      <PostData>
+        <PostDataAuthor>{operator.autor}</PostDataAuthor>
+        <Dotted />
+        <span>{operator.date}</span>
+        <Dotted />
+        <span>{operator.views}</span>
+      </PostData>
+      <CardText>{operator.text}</CardText>
     </Card>
   )
 }

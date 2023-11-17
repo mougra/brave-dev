@@ -4,20 +4,21 @@ import styled from 'styled-components'
 import Modal from './Modal'
 import { useRouter } from 'next/navigation'
 import MaskedInput from 'react-input-mask'
-import { VALIDATE_NUMBER, VALIDATE_SUM } from '../constants/validation'
+import { VALIDATE_NUMBER, VALIDATE_SUM } from '../utils/validation'
 
 const ButtonNavigate = styled.button`
   max-width: 280px;
   width: 100%;
-  background: #fe8c21;
+  background: #95bff8;
   color: black;
   border: none;
   margin-top: 40px;
-  padding: 20px;
+  padding: 10px 0;
   font-size: 1.5rem;
   font-weight: 100;
   letter-spacing: 5px;
   border-radius: 8px;
+  transition: all 0.3s linear 0s;
 
   &:hover {
     background: #d45049;
@@ -33,7 +34,7 @@ const SpanModal = styled.span`
   color: transparent;
   -webkit-background-clip: text;
   background-clip: text;
-  background-image: linear-gradient(#fb0000, #ff85039f);
+  background-image: linear-gradient(#95bff8, #d77ea6);
 `
 
 const FormContainer = styled.div`
@@ -72,7 +73,6 @@ const FormContainer = styled.div`
     border-radius: 4px;
     border: 1px solid #0e101c;
     padding: 10px 15px;
-    margin-bottom: 20px;
     font-size: 1rem;
   }
 
@@ -89,14 +89,15 @@ const FormContainer = styled.div`
   input[type='submit'] {
     max-width: 260px;
     margin: 0 auto;
-    background: #fe8c21;
+    background: #d77ea6;
     color: black;
     border: none;
     margin-top: 40px;
-    padding: 20px;
+    padding: 10px;
     font-size: 1.5rem;
     font-weight: 100;
     letter-spacing: 5px;
+    transition: all 0.3s linear 0s;
   }
 
   button[type='submit']:hover,

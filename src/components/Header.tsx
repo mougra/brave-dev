@@ -1,15 +1,13 @@
-import { useRef, useState } from 'react'
-import Logo from '../../public/Logotype.svg'
+import { useState } from 'react'
+import Logo from '../../public/logo.png'
 import Hamburger from './Hamburger'
 import styled from 'styled-components'
-import { useOnClickOutside } from '../hook/outside'
-import { useWindowSize } from '../hook/resize'
-import { IOperator, Size } from '../models/models'
+import { IOperator } from '../models/models'
 import Image from 'next/image'
 import Link from 'next/link'
 import data from '../../public/operator.json'
 
-const Wrapper = styled.div`
+const Head = styled.header`
   max-width: 1160px;
   margin: 0 auto;
   padding: 0 0.625rem;
@@ -66,9 +64,7 @@ const StyledMenu = styled.nav<{ open: boolean }>`
 `
 
 const MenuLogo = styled.div`
-  height: 24px;
-  padding-top: 5px;
-  padding-bottom: 38px;
+  padding-bottom: 18px;
   padding-left: 1.25rem;
 `
 const ImgContainer = styled.div`
@@ -95,50 +91,38 @@ const Overlay = styled.div<{ open: boolean }>`
 function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
-  const node = useRef<HTMLDivElement>(null)
   const handleClose = () => setIsOpen(false)
 
-  useOnClickOutside(node, () => setIsOpen(false))
-
-  const size: Size = useWindowSize()
-
   return (
-    <Wrapper>
+    <Head>
       <HeaderStyle>
-        <Burger ref={node}>
-          {size.SCREEN_SM && (
-            <StyledMenu open={isOpen}>
-              <ImgContainer>
-                <MenuLogo>
-                  <Image src={Logo} alt='logo' />
-                </MenuLogo>
-              </ImgContainer>
-              <BurgerNav>
-                {data.map((operator: IOperator) => (
-                  <Link
-                    key={operator.title}
-                    href={`/operator/${operator.title}`}
-                  >
-                    {operator.title}
-                  </Link>
-                ))}
-              </BurgerNav>
-            </StyledMenu>
-          )}
-          {size.SCREEN_SM && (
-            <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
-          )}
-          {size.SCREEN_SM && (
-            <Overlay open={isOpen} onClick={() => handleClose()} />
-          )}
+        <Burger>
+          <StyledMenu open={isOpen}>
+            <ImgContainer>
+              <MenuLogo>
+                <Image src={Logo} alt='logo' width='40' height='40' />
+              </MenuLogo>
+            </ImgContainer>
+            <BurgerNav>
+              {data.map((operator: IOperator) => (
+                <Link key={operator.title} href={`/operator/${operator.title}`}>
+                  {operator.title}
+                </Link>
+              ))}
+            </BurgerNav>
+          </StyledMenu>
+          <Hamburger isOpen={isOpen} setIsOpen={setIsOpen} />
+          <Overlay open={isOpen} onClick={() => handleClose()} />
         </Burger>
-        <a href='#'>
-          <MainLogo open={isOpen}>
-            <Image src={Logo} alt='logo' />
-          </MainLogo>
-        </a>
+        {!isOpen && (
+          <a href='#'>
+            <MainLogo open={isOpen}>
+              <Image src={Logo} alt='logo' width='40' height='40' />
+            </MainLogo>
+          </a>
+        )}
       </HeaderStyle>
-    </Wrapper>
+    </Head>
   )
 }
 

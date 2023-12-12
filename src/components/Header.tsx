@@ -42,7 +42,7 @@ const HeaderStyle = styled.div`
 const StyledMenu = styled.nav<{ open: boolean }>`
   top: 0;
   left: 0;
-  height: 100vh;
+  height: 100%;
   width: 20rem;
   position: fixed;
   background-color: #fff;
@@ -82,8 +82,8 @@ const Overlay = styled.div<{ open: boolean }>`
   position: fixed;
   top: 0;
   left: 0;
-  width: 100vw;
-  height: 100vh;
+  width: 100%;
+  height: 100%;
   z-index: ${({ open }) => (open ? '10' : '-10')};
   background-color: rgba(255, 255, 255, 0.7);
 `
@@ -92,8 +92,6 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClose = () => setIsOpen(false)
-
-  console.log('isOpen', isOpen)
 
   return (
     <Head>
@@ -107,7 +105,7 @@ function Header() {
             </ImgContainer>
             <BurgerNav>
               {data.map((operator: IOperator) => (
-                <Link key={operator.title} href={`/operator/${operator.title}`}>
+                <Link key={operator.title} href={`/${operator.title}`}>
                   {operator.title}
                 </Link>
               ))}

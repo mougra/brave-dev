@@ -3,8 +3,9 @@ import OPERATORS from '../../public/operator.json'
 import { IOperator } from './../models/models'
 import Header from '../components/Header'
 import OperatorCard from '../components/OperatorCard'
-import '../app/globals.css'
+// import '../app/globals.css'
 import Background from '@/components/Background'
+import { GlobalStyle } from '@/app/layout'
 
 const Section = styled.section`
   max-width: 1160px;
@@ -30,6 +31,7 @@ const LayoutCards = styled.div`
 export default function Index() {
   return (
     <>
+      <GlobalStyle />
       <Header />
       <Background />
       <Section>

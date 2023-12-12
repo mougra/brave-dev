@@ -1,6 +1,5 @@
 import { IOperator } from '../models/models'
 import styled from 'styled-components'
-import Link from 'next/link'
 import ButtonPay from './ButtonPay'
 
 const PostData = styled.div`
@@ -130,8 +129,7 @@ function OperatorCard({ operator }: PostProps) {
 
       <CardContainer>
         <CardCaption>{operator.title}</CardCaption>{' '}
-        {/* <Link href={`/operator/${operator.title}`}> */}
-        <ButtonPay operator={operator.title} /> {/* </Link> */}
+        <ButtonPay operator={operator.title} />
       </CardContainer>
 
       <PostData>

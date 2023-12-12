@@ -56,7 +56,7 @@ const StyledMenu = styled.nav<{ open: boolean }>`
   border-right: 1px solid #e9e9e9;
 
   transition: transform 0.3s ease-in-out;
-  transform: ${({ open }) => (open ? 'translateX(0)' : 'translateX(-100%)')};
+  transform: ${({ open }) => (!open ? 'translateX(-100%)' : 'translateX(0)')};
 
   @media (max-width: 400px) {
     width: 100vw;
@@ -92,6 +92,8 @@ function Header() {
   const [isOpen, setIsOpen] = useState(false)
 
   const handleClose = () => setIsOpen(false)
+
+  console.log('isOpen', isOpen)
 
   return (
     <Head>

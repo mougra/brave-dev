@@ -129,6 +129,16 @@ type FormData = {
   phone: string
 }
 
+interface DataType {
+  payment: PaymentType
+}
+
+enum PaymentType {
+  pending,
+  resolve,
+  reject,
+}
+
 export default function Form() {
   const router = useRouter()
   const [isModalActive, setIsModalActive] = useState(false)
@@ -137,16 +147,6 @@ export default function Form() {
     handleSubmit,
     formState: { errors },
   } = useForm<FormData>()
-
-  interface DataType {
-    payment: PaymentType
-  }
-
-  enum PaymentType {
-    pending,
-    resolve,
-    reject,
-  }
 
   const [formData, setData] = useState<DataType>({ payment: 0 })
 
@@ -169,8 +169,8 @@ export default function Form() {
       setTimeout(
         () =>
           Math.random() > 0.5
-            ? resolve({ payment: 1 })
-            : reject({ payment: 2 }),
+            ? resolve({ payment: PaymentType.resolve })
+            : reject({ payment: PaymentType.reject }),
         1000
       )
     })

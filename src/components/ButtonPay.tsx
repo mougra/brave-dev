@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 import styled from 'styled-components'
 
@@ -6,6 +7,12 @@ const Button = styled.div`
   background-color: #95bff8;
   width: max-content;
   border-radius: 8px;
+
+  a {
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+  }
 
   &:hover a::after {
     width: 100%;
@@ -27,10 +34,6 @@ const Button = styled.div`
     overflow: hidden;
   }
 `
-const ButtonLink = styled.a`
-  display: flex;
-  align-items: center;
-`
 
 interface PostProps {
   operator: string
@@ -39,7 +42,7 @@ interface PostProps {
 function ButtonPay({ operator }: PostProps) {
   return (
     <Button>
-      <ButtonLink href={`/${operator}`}>
+      <Link href={`/${operator}`}>
         <i>
           <svg
             enableBackground='new 0 0 780 500'
@@ -73,7 +76,10 @@ function ButtonPay({ operator }: PostProps) {
             </g>
           </svg>
         </i>
-      </ButtonLink>
+      </Link>
+      {/* <ButtonLink href={`/${operator}`}>
+      
+      </ButtonLink> */}
     </Button>
   )
 }

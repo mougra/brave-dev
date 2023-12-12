@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import React from 'react'
-// import '../app/globals.css'
 
 const ErrorFound = styled.div`
   display: flex;

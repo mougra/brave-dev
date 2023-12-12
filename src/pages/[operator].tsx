@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
-// import '../app/globals.css'
 import FormPay from '../components/FormPay'
 import OPERATORS from '../../public/operator.json'
 import Background from '@/components/Background'

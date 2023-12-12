@@ -1,4 +1,3 @@
-// import './globals.css'
 import { Roboto } from 'next/font/google'
 import { createGlobalStyle } from 'styled-components'
 
@@ -75,7 +74,6 @@ export default function RootLayout({
 }) {
   return (
     <html lang='en'>
-      <GlobalStyle />
       <body className={roboto.className}>{children}</body>
     </html>
   )
